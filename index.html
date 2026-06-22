@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LeBron</title>
+    </head>
+    <body>
+        <p id="timer">Time: 10</p>
+        <p id="score">Score:</p>
+        <p id="gameOver"></p>
+        <button id="clickMe">Click me!</button>
+        <script>
+            let score = 0
+            let scoreDisplay = document.getElementById("score")
+            let timerDisplay = document.getElementById("timer")
+            let gameOverDisplay = document.getElementById("gameOver")
+            let button = document.getElementById("clickMe")
+            let timeLeft = 10
+            let countdown = setInterval(function() {
+                timeLeft = timeLeft - 1
+                if (timeLeft <=0) {
+                    clearInterval(countdown)
+                    alert("Time's up! Your score is: " + score)
+                    gameOverDisplay.innerText = "Game Over!"
+                }
+                timerDisplay.innerText = "Time: " + timeLeft
+            }, 1000)
+            button.addEventListener("click", function() {
+            if (timeLeft <= 0) {
+
+            }
+            else {
+            scoreDisplay.innerText = "Score: " + (score + 1)
+            score++
+            if (score >= 10) {
+                alert("You win!")
+            }
+            }
+            })
+        </script>
+
+    </body>
+</html>
