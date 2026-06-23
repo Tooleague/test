@@ -2,19 +2,42 @@
 <html>
     <head>
         <title>LeBron</title>
+        <style>
+            body {
+                background-color: #2FA4B2;
+                color: #0000FF;
+                text-align: center;
+                font-family: 'Segoe UI', Arial, sans-serif;
+                padding-top: 50px;
+            }
+            #clickMe {
+                background-color: #0000FF;
+                color: #000000;
+                font-size: 20px;
+                padding: 10px 20px;
+                border: 5px solid #000000;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            #score, #timer, #gameOver {
+                font-size: 28px;
+            }
+        </style>
     </head>
     <body>
-        <p id="timer">Time: 10</p>
-        <p id="score">Score:</p>
+        <p id="timer">Time: </p>
+        <p id="score">Score: </p>
         <p id="gameOver"></p>
-        <button id="clickMe">Click me!</button>
+        <button id="clickMe">Score!</button>
+        <button id="reset">Reset</button>
         <script>
             let score = 0
             let scoreDisplay = document.getElementById("score")
             let timerDisplay = document.getElementById("timer")
             let gameOverDisplay = document.getElementById("gameOver")
-            let button = document.getElementById("clickMe")
-            let timeLeft = 10
+            let buttonClickMe = document.getElementById("clickMe")
+            let buttonReset = document.getElementById("reset")
+            let timeLeft = 15
             let countdown = setInterval(function() {
                 timeLeft = timeLeft - 1
                 if (timeLeft <=0) {
@@ -24,19 +47,22 @@
                 }
                 timerDisplay.innerText = "Time: " + timeLeft
             }, 1000)
-            button.addEventListener("click", function() {
-            if (timeLeft <= 0) {
-
-            }
-            else {
+            buttonReset.addEventListener("click", function() {
+            score = 0
+            timeLeft = 15
+            scoreDisplay.innerText = "Score: " + score
+            timerDisplay.innerText = "Time: " + timeLeft
+            gameOverDisplay.innerText = ""
+            })
+            buttonClickMe.addEventListener("click", function() {
+            if (timeLeft > 0) {
             scoreDisplay.innerText = "Score: " + (score + 1)
             score++
-            if (score >= 10) {
+            if (score >= 100) {
                 alert("You win!")
             }
             }
             })
         </script>
-
     </body>
 </html>
