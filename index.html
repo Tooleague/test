@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>LeBron</title>
+        <title>LeBron James Simulator</title>
         <style>
             body {
                 background-color: #2FA4B2;
@@ -18,6 +18,7 @@
                 border: 5px solid #000000;
                 border-radius: 5px;
                 cursor: pointer;
+                position: absolute;
             }
             #score, #timer, #gameOver {
                 font-size: 28px;
@@ -28,6 +29,9 @@
         <p id="timer">Time: </p>
         <p id="score">Score: </p>
         <p id="gameOver"></p>
+        <button id="easyBtn">Easy</button>
+        <button id="mediumBtn">Medium</button>
+        <button id="hardBtn">Hard</button>
         <button id="clickMe">Score!</button>
         <button id="reset">Reset</button>
         <script>
@@ -37,7 +41,21 @@
             let gameOverDisplay = document.getElementById("gameOver")
             let buttonClickMe = document.getElementById("clickMe")
             let buttonReset = document.getElementById("reset")
-            let timeLeft = 15
+            let easyBtn = document.getElementById("easyBtn")
+            let mediumBtn = document.getElementById("mediumBtn")
+            let hardBtn = document.getElementById("hardBtn")
+            let easy = { time:20, area: 300}
+            let medium = { time:15, area: 500}
+            let hard = { time:10, area: 800}
+            let settings = easy
+            let timeLeft = settings.time
+            moveButton()
+            function moveButton() {
+                let randomX = Math.floor(Math.random() * (settings.area))
+                buttonClickMe.style.left = randomX + "px"
+                let randomY = Math.floor(Math.random() * (settings.area))
+                buttonClickMe.style.top = randomY + "px"
+            }
             startTimer()
             function startTimer() {
                 countdown = setInterval(function() {
@@ -50,9 +68,21 @@
                     timerDisplay.innerText = "Time: " + timeLeft
                 }, 1000)
             }
+            easyBtn.addEventListener("click", function() {
+                settings = easy
+                alert("DIfficulty: Easy")
+            })
+            mediumBtn.addEventListener("click", function() {
+                settings = medium
+                alert("DIfficulty: Medium")
+            })
+            hardBtn.addEventListener("click", function() {
+                settings = hard
+                alert("DIfficulty: Hard")
+            })
             buttonReset.addEventListener("click", function() {
             score = 0
-            timeLeft = 15
+            timeLeft = settings.time
             clearInterval(countdown)
             scoreDisplay.innerText = "Score: " + score
             timerDisplay.innerText = "Time: " + timeLeft
@@ -63,8 +93,10 @@
             if (timeLeft > 0) {
             scoreDisplay.innerText = "Score: " + (score + 1)
             score++
-            if (score >= 100) {
+            moveButton()
+            if (score >= 10) {
                 alert("You win!")
+                clearInterval(countdown)
             }
             }
             })
