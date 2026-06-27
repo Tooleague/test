@@ -3,8 +3,8 @@ let playerY = 200;
 let score = 0;
 let coins = [];
 function setup() {
-createCanvas(400, 400);
-for (let i = 0; i < 5; i++) {
+createCanvas(500, 500);
+for (let i = 0; i < 3; i++) {
     coins.push({
         
     x: random(20, width - 20), 
@@ -18,7 +18,7 @@ for (let i = 0; i < coins.length; i++) {
 fill(255, 215, 0);
 circle(coins[i].x, coins[i].y, 20);
 }
-fill(255);
+fill(0);
 circle(playerX, playerY, 40);
 circle(mouseX, mouseY, 50);
 if (keyIsDown(RIGHT_ARROW)) {
@@ -44,4 +44,3 @@ function respawnCoin(i) {
     coins[i].x = random(20, width - 20);
     coins[i].y = random(20, height-20);
 }
-console.log("Six, seven!")
